@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 if Gem.win_platform?
   Encoding.default_external = Encoding.find(Encoding.locale_charmap)
   Encoding.default_internal = __ENCODING__
@@ -10,12 +8,12 @@ if Gem.win_platform?
 end
 
 current_path = File.dirname(__FILE__)
-greetings_path = current_path + '/data/greetings.txt'
-answers_path = current_path + '/data/answers.txt'
+greetings_path = File.new(current_path + '/data/greetings.txt', 'r:UTF-8')
+greetings = greetings_path.readlines.sample
 
-greetings = File.new(greetings_path, 'r:UTF-8')
-answers = File.new(answers_path, 'r:UTF-8')
+answers_path = File.new(current_path + '/data/answers.txt', 'r:UTF-8')
+answers = answers_path.readlines.sample
 
-puts greetings.readlines.sample
+puts greetings
 sleep 1
-puts answers.readlines.sample
+puts answers
